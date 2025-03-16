@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoGettersAndSetters;
+namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NeverUseGettersAndSetters;
 
 interface AllowedInterface
 {

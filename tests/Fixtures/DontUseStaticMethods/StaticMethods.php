@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoStaticMethods;
+namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\DontUseStaticMethods;
 
 class StaticMethods
 {

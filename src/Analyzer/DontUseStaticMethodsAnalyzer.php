@@ -15,7 +15,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
 
-final class StaticMethodsAnalyzer extends RuleAnalyzer
+final class DontUseStaticMethodsAnalyzer extends RuleAnalyzer
 {
     use PathExclusionTrait;
     use MethodExceptionTrait;

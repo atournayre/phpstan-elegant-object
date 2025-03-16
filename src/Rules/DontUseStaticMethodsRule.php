@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atournayre\PHPStan\ElegantObject\Rules;
 
-use Atournayre\PHPStan\ElegantObject\Analyzer\StaticMethodsAnalyzer;
+use Atournayre\PHPStan\ElegantObject\Analyzer\DontUseStaticMethodsAnalyzer;
 use Atournayre\PHPStan\ElegantObject\ComposableRule;
 use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use PhpParser\Node;
@@ -12,9 +12,9 @@ use PhpParser\Node;
 /**
  * @template T of NodeAnalyzerInterface
  * @template TNodeType of Node
- * @extends ComposableRule<StaticMethodsAnalyzer, Node>
+ * @extends ComposableRule<DontUseStaticMethodsAnalyzer, Node>
  */
-final class NoStaticMethodsRule extends ComposableRule
+final class DontUseStaticMethodsRule extends ComposableRule
 {
     /**
      * @param array<string> $excludedPaths
@@ -26,7 +26,7 @@ final class NoStaticMethodsRule extends ComposableRule
         array $allowedMethodNames = [],
         array $allowedInterfaces = []
     ) {
-        parent::__construct(new StaticMethodsAnalyzer(
+        parent::__construct(new DontUseStaticMethodsAnalyzer(
             $excludedPaths,
             $allowedMethodNames,
             $allowedInterfaces
