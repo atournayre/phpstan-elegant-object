@@ -84,6 +84,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function beEitherFinalOrAbstract(): self
+    {
+        return new self(
+            chapter: '4.3',
+            chapterTitle: 'Be either final or abstract',
+            link: 'http://goo.gl/vo9F2g',
+        );
+    }
+
     /**
      * @return array<string>
      */

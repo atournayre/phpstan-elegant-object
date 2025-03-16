@@ -68,7 +68,7 @@ From the book:
 - [ ] Avoid type introspection and casting (chapter 3.7)
 - [ ] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
-- [ ] Be either final or abstract (chapter 4.3)
+- [x] Be either final or abstract (chapter 4.3)
 - [ ] Private static literals (chapter 5.4)
 
 Other:
