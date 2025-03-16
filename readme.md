@@ -6,7 +6,7 @@ This PHPStan extension adds custom rules to encourage and validate elegant objec
 
 It's based on [Yegor Bugayenko](https://github.com/yegor256)'s [books](https://www.yegor256.com/books.html) :
 - Elegant Objects (Volume 1)
-- Elegant Objects (Volume 2)]
+- Elegant Objects (Volume 2)
 
 ## Installation
 
