@@ -21,6 +21,11 @@ final readonly class Pattern
         return new self('/^set[A-Za-z0-9_]/');
     }
 
+    public static function erSuffix(): self
+    {
+        return new self('/er$/i');
+    }
+
     public function match(string $value): bool
     {
         return (bool) preg_match($this->pattern, $value);

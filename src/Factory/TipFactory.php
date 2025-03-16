@@ -48,6 +48,33 @@ final readonly class TipFactory
         );
     }
 
+    public static function neverUseErNames(): self
+    {
+        return new self(
+            chapter: '1.1',
+            chapterTitle: 'Never use -er names',
+            link: 'http://goo.gl/Uy3wZ6',
+        );
+    }
+
+    public static function keepConstructorsCodeFree(): self
+    {
+        return new self(
+            chapter: '1.3',
+            chapterTitle: 'Keep constructors code-free',
+            link: 'http://goo.gl/DCMFDY',
+        );
+    }
+
+    public static function alwaysUseInterface(): self
+    {
+        return new self(
+            chapter: '2.3',
+            chapterTitle: 'Always use interface',
+            link: 'http://goo.gl/vo9F2g',
+        );
+    }
+
     /**
      * @return array<string>
      */
