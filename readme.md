@@ -54,10 +54,10 @@ vendor/bin/phpunit
 ## Rules
 
 From the book:
-- [ ] Never use -er names (chapter 1.1)
-- [ ] Keep constructors code-free (chapter 1.3)
-- [ ] Always use interface (chapter 2.3)
-- [ ] Don't use public constant (chapter 2.5)
+- [x] Never use -er names (chapter 1.1)
+- [x] Keep constructors code-free (chapter 1.3)
+- [x] Always use interface (chapter 2.3)
+- [x] Don't use public constant (chapter 2.5)
 - [ ] Be immutable (chapter 2.6)
 - [ ] Keep interfaces short (chapter 2.9)
 - [ ] Expose fewer than 5 public methods (chapter 3.1)

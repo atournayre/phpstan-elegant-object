@@ -75,6 +75,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function neverUsePublicConstants(): self
+    {
+        return new self(
+            chapter: '3.1',
+            chapterTitle: 'All properties and constants must be private',
+            link: 'http://goo.gl/8ql2ov',
+        );
+    }
+
     /**
      * @return array<string>
      */
