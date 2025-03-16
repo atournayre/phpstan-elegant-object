@@ -55,7 +55,7 @@ vendor/bin/phpunit
 
 From the book:
 - [ ] Never use -er names (chapter 1.1)
-- [ ] Keep constructors code-fre (chapter 1.3)
+- [ ] Keep constructors code-free (chapter 1.3)
 - [ ] Always use interface (chapter 2.3)
 - [ ] Don't use public constant (chapter 2.5)
 - [ ] Be immutable (chapter 2.6)
@@ -66,7 +66,7 @@ From the book:
 - [x] Never use getters and setters (chapter 3.5)
 - [ ] Don't use new outside of secondary constructors (chapter 3.6)
 - [ ] Avoid type introspection and casting (chapter 3.7)
-- [ ] Nevers return Null (chapter 4.1)
+- [ ] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
 - [ ] Be either final or abstract (chapter 4.3)
 - [ ] Private static literals (chapter 5.4)
