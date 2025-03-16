@@ -4,7 +4,7 @@
 
 This PHPStan extension adds custom rules to encourage and validate elegant object design principles in your PHP code.
 
-It is base on [Yegor Bugayenko](https://github.com/yegor256)'s [books](https://www.yegor256.com/books.html) :
+It's based on [Yegor Bugayenko](https://github.com/yegor256)'s [books](https://www.yegor256.com/books.html) :
 - Elegant Objects (Volume 1)
 - Elegant Objects (Volume 2)]
 
