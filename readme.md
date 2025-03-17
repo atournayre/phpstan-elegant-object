@@ -28,9 +28,7 @@ includes:
 
 ## Available Rules
 
-### ExampleRule
-
-This rule checks if the code uses the `dangerousMethod()` method and suggests using `safeMethod()` instead.
+See [configuration](docs/configuration.md) for a list of available rules.
 
 ## Creating Custom Rules
 

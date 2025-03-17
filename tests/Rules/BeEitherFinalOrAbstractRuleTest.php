@@ -12,7 +12,7 @@ use PHPStan\Testing\RuleTestCase;
 /**
  * @extends RuleTestCase<BeEitherFinalOrAbstractRule<NodeAnalyzerInterface, Node>>
  */
-class BeEitherFinalOrAbstractTest extends RuleTestCase
+class BeEitherFinalOrAbstractRuleTest extends RuleTestCase
 {
     protected function getRule(): BeEitherFinalOrAbstractRule
     {
