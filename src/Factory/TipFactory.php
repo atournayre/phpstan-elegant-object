@@ -93,6 +93,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function neverReturnNull(): self
+    {
+        return new self(
+            chapter: '4.1',
+            chapterTitle: 'Never return null',
+            link: 'http://goo.gl/TzrYbz',
+        );
+    }
+
     /**
      * @return array<string>
      */

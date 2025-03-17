@@ -66,7 +66,7 @@ From the book:
 - [x] Never use getters and setters (chapter 3.5)
 - [ ] Don't use new outside of secondary constructors (chapter 3.6)
 - [ ] Avoid type introspection and casting (chapter 3.7)
-- [ ] Never return Null (chapter 4.1)
+- [x] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
 - [x] Be either final or abstract (chapter 4.3)
 - [ ] Private static literals (chapter 5.4)

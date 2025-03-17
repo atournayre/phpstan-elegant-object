@@ -13,22 +13,18 @@ trait InterfaceExceptionTrait
 
     public function isAllowedInterface(string $interfaceName): bool
     {
-        if (in_array($interfaceName, $this->allowedInterfaces, true)) {
-            return true;
-        }
+        foreach ($this->allowedInterfaces as $allowed) {
+            if ($interfaceName === $allowed) {
+                return true;
+            }
 
-        foreach ($this->allowedInterfaces as $pattern) {
-            if (str_contains($pattern, '*')) {
-                if ($pattern === '*Interface') {
-                    if (str_ends_with($interfaceName, 'Interface')) {
-                        return true;
-                    }
-                    continue;
-                }
+            if ($allowed === '*Interface' && str_ends_with($interfaceName, 'Interface')) {
+                return true;
+            }
 
-                $pattern = str_replace('\\', '\\\\', $pattern);
-                $pattern = str_replace('**', '.*', $pattern);
-                $pattern = str_replace('*', '[^\\\\]+', $pattern);
+            if (str_contains($allowed, '*')) {
+                $pattern = preg_quote($allowed, '/');
+                $pattern = str_replace('\*', '.*', $pattern);
                 $pattern = '/^' . $pattern . '$/';
 
                 if (preg_match($pattern, $interfaceName)) {
@@ -46,15 +42,6 @@ trait InterfaceExceptionTrait
             return false;
         }
 
-        if ($this->isAllowedInterface($classReflection->getName())) {
-            return true;
-        }
-
-        $parentClass = $classReflection->getParentClass();
-        if ($parentClass !== null && $parentClass->isAbstract() && $parentClass->hasMethod($methodName)) {
-            return true;
-        }
-
         foreach ($classReflection->getInterfaces() as $interface) {
             $interfaceName = $interface->getName();
             if ($this->isAllowedInterface($interfaceName)) {
@@ -65,7 +52,12 @@ trait InterfaceExceptionTrait
             }
         }
 
+        $parentClass = $classReflection->getParentClass();
         if ($parentClass !== null) {
+            if ($parentClass->isAbstract() && $parentClass->hasMethod($methodName)) {
+                return true;
+            }
+
             foreach ($parentClass->getInterfaces() as $interface) {
                 $interfaceName = $interface->getName();
                 if ($this->isAllowedInterface($interfaceName)) {
@@ -75,6 +67,7 @@ trait InterfaceExceptionTrait
                     }
                 }
             }
+
             return $this->isMethodFromAllowedInterface($parentClass, $methodName);
         }
 
