@@ -102,6 +102,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function beImmutable(): self
+    {
+        return new self(
+            chapter: '2.6',
+            chapterTitle: 'Be immutable',
+            link: 'http://goo.gl/z1XGjO',
+        );
+    }
+
     /**
      * @return array<string>
      */

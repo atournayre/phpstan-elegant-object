@@ -58,7 +58,7 @@ From the book:
 - [x] Keep constructors code-free (chapter 1.3)
 - [x] Always use interface (chapter 2.3)
 - [x] Don't use public constant (chapter 2.5)
-- [ ] Be immutable (chapter 2.6)
+- [x] Be immutable (chapter 2.6)
 - [ ] Keep interfaces short (chapter 2.9)
 - [ ] Expose fewer than 5 public methods (chapter 3.1)
 - [x] Don't use static methods (chapter 3.2)

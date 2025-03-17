@@ -11,31 +11,6 @@ trait InterfaceExceptionTrait
     /** @var array<string> */
     protected array $allowedInterfaces = [];
 
-    public function isAllowedInterface(string $interfaceName): bool
-    {
-        foreach ($this->allowedInterfaces as $allowed) {
-            if ($interfaceName === $allowed) {
-                return true;
-            }
-
-            if ($allowed === '*Interface' && str_ends_with($interfaceName, 'Interface')) {
-                return true;
-            }
-
-            if (str_contains($allowed, '*')) {
-                $pattern = preg_quote($allowed, '/');
-                $pattern = str_replace('\*', '.*', $pattern);
-                $pattern = '/^' . $pattern . '$/';
-
-                if (preg_match($pattern, $interfaceName)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
     public function isMethodFromAllowedInterface(?ClassReflection $classReflection, string $methodName): bool
     {
         if ($classReflection === null) {
@@ -73,4 +48,50 @@ trait InterfaceExceptionTrait
 
         return false;
     }
+
+    public function isAllowedInterface(string $interfaceName): bool
+    {
+        foreach ($this->allowedInterfaces as $allowed) {
+            if ($interfaceName === $allowed) {
+                return true;
+            }
+
+            if ($allowed === '*Interface' && str_ends_with($interfaceName, 'Interface')) {
+                return true;
+            }
+
+            if (str_contains($allowed, '*')) {
+                $pattern = preg_quote($allowed, '/');
+                $pattern = str_replace('\*', '.*', $pattern);
+                $pattern = '/^' . $pattern . '$/';
+
+                if (preg_match($pattern, $interfaceName)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function hasAllowedInterface(?ClassReflection $classReflection): bool
+    {
+        if ($classReflection === null) {
+            return false;
+        }
+
+        foreach ($classReflection->getInterfaces() as $interface) {
+            if ($this->isAllowedInterface($interface->getName())) {
+                return true;
+            }
+        }
+
+        $parentClass = $classReflection->getParentClass();
+        if ($parentClass !== null) {
+            return $this->hasAllowedInterface($parentClass);
+        }
+
+        return false;
+    }
+
 }
