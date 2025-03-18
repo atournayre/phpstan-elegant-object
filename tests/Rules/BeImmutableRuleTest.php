@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace Atournayre\PHPStan\ElegantObject\Tests\Rules;
 
-use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use Atournayre\PHPStan\ElegantObject\Factory\TipFactory;
 use Atournayre\PHPStan\ElegantObject\Rules\BeImmutableRule;
 use Atournayre\PHPStan\ElegantObject\Tests\Fixtures\BeImmutable\MutableInterface;
-use PhpParser\Node;
 use PHPStan\Testing\RuleTestCase;
 
 /**
- * @extends RuleTestCase<BeImmutableRule<NodeAnalyzerInterface, Node>>
+ * @extends RuleTestCase<BeImmutableRule>
  */
 class BeImmutableRuleTest extends RuleTestCase
 {
