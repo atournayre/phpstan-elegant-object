@@ -120,6 +120,14 @@ final readonly class TipFactory
         );
     }
 
+    public static function exposeFewPublicMethods(): self
+    {
+        return new self(
+            chapter: '3.1',
+            chapterTitle: 'Expose few public methods',
+        );
+    }
+
     /**
      * @return array<string>
      */

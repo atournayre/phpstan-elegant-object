@@ -152,4 +152,15 @@
   tags:
     - phpstan.rules.rule
 
+# ExposeFewPublicMethodsRule
+-
+  class: Atournayre\PHPStan\ElegantObject\Rules\ExposeFewPublicMethodsRule
+  arguments:
+    excludedPaths:
+      - '/excluded/path'
+      - '/excluded/path/*.php'
+    maxPublicMethods: 5
+  tags:
+    - phpstan.rules.rule
+
 ```
