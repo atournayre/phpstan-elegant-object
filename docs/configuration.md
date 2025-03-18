@@ -141,4 +141,15 @@
   tags:
     - phpstan.rules.rule
 
+# KeepInterfacesShortRule
+-
+  class: Atournayre\PHPStan\ElegantObject\Rules\KeepInterfacesShortRule
+  arguments:
+    excludedPaths:
+      - '/excluded/path'
+      - '/excluded/path/*.php'
+    maxMethods: 5
+  tags:
+    - phpstan.rules.rule
+
 ```

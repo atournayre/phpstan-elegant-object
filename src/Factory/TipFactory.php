@@ -111,6 +111,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function keepInterfacesShort(): self
+    {
+        return new self(
+            chapter: '2.9',
+            chapterTitle: 'Keep interfaces short',
+            link: 'http://goo.gl/1Zos9r',
+        );
+    }
+
     /**
      * @return array<string>
      */
