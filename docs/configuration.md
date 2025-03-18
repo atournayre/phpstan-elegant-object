@@ -163,4 +163,20 @@
   tags:
     - phpstan.rules.rule
 
+# NeverAcceptNullArgumentsRule
+-
+  class: Atournayre\PHPStan\ElegantObject\Rules\NeverAcceptNullArgumentsRule
+  arguments:
+    excludedPaths:
+      - '/excluded/path'
+      - '/excluded/path/*.php'
+    allowedMethodNames:
+      - 'allowedMethod'
+    allowedParameterNames:
+      - 'allowedParameter'
+    allowedInterfaces:
+      - 'App\Contract\DtoInterface'
+  tags:
+    - phpstan.rules.rule
+
 ```

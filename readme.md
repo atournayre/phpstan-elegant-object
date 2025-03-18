@@ -60,7 +60,7 @@ From the book:
 - [x] Keep interfaces short (chapter 2.9)
 - [x] Expose fewer than 5 public methods (chapter 3.1)
 - [x] Don't use static methods (chapter 3.2)
-- [ ] Never accept null arguments (chapter 3.3)
+- [x] Never accept null arguments (chapter 3.3)
 - [x] Never use getters and setters (chapter 3.5)
 - [ ] Don't use new outside of secondary constructors (chapter 3.6)
 - [ ] Avoid type introspection and casting (chapter 3.7)

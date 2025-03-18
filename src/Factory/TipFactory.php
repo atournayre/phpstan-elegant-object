@@ -128,6 +128,15 @@ final readonly class TipFactory
         );
     }
 
+    public static function neverAcceptNullArguments(): self
+    {
+        return new self(
+            chapter: '3.3',
+            chapterTitle: 'Never accept null arguments',
+            link: 'http://goo.gl/TzrYbz',
+        );
+    }
+
     /**
      * @return array<string>
      */
