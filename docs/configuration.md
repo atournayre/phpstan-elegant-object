@@ -179,7 +179,8 @@ services:
           - 'App\Contract\DtoInterface'
       tags:
         - phpstan.rules.rule
-    # NeverAcceptNullArgumentsRule
+
+    # NoNewOutsideSecondaryConstructorsRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule
       arguments:
