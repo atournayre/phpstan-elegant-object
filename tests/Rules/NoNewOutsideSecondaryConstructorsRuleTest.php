@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Atournayre\PHPStan\ElegantObject\Tests\Rules;
 
+use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use Atournayre\PHPStan\ElegantObject\Factory\TipFactory;
 use Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule;
-use PHPStan\Rules\Rule;
+use PhpParser\Node;
 use PHPStan\Testing\RuleTestCase;
 
 /**
- * @extends RuleTestCase<NoNewOutsideSecondaryConstructorsRule>
+ * @extends RuleTestCase<NoNewOutsideSecondaryConstructorsRule<NodeAnalyzerInterface, Node>>
  */
 final class NoNewOutsideSecondaryConstructorsRuleTest extends RuleTestCase
 {
-    protected function getRule(): Rule
+    protected function getRule(): NoNewOutsideSecondaryConstructorsRule
     {
         return new NoNewOutsideSecondaryConstructorsRule(
             [],
