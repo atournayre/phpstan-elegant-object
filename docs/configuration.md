@@ -178,5 +178,25 @@
       - 'App\Contract\DtoInterface'
   tags:
     - phpstan.rules.rule
+# NeverAcceptNullArgumentsRule
+-
+  class: Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule
+  arguments:
+    excludedPaths:
+      - '/excluded/path'
+      - '/excluded/path/*.php'
+    allowedInterfaces:
+      - 'App\Contract\DtoInterface'
+    excludedClasses:
+      - 'App\ExcludedClass'
+    secondaryConstructorPrefixes:
+      - 'new'
+      - 'from'
+      - 'create'
+      - 'of'
+      - 'with'
+      - 'build'
+  tags:
+    - phpstan.rules.rule
 
 ```

@@ -137,6 +137,14 @@ final readonly class TipFactory
         );
     }
 
+    public static function noNewOutsideSecondaryConstructors(): self
+    {
+        return new self(
+            chapter: '3.6',
+            chapterTitle: 'Don\'t use new outside of secondary constructors',
+        );
+    }
+
     /**
      * @return array<string>
      */
