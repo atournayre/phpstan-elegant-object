@@ -83,10 +83,14 @@ final class KeepConstructorsCodeFreeAnalyzer extends RuleAnalyzer
                 continue;
             }
 
+            if ($this->isAssertion($stmt)) {
+                continue;
+            }
+
             if (!$hasNonAssignmentCode) {
                 $hasNonAssignmentCode = true;
                 $errors = RuleErrorFactory::createErrorWithTips(
-                    message: 'Constructor %s::%s() contains code other than property assignments, which violates the "code-free constructor" principle (Elegant Object principle).',
+                    message: 'Constructor %s::%s() contains code other than property assignments or assertions, which violates the "code-free constructor" principle (Elegant Object principle).',
                     messageParameters: [$className, $methodName],
                     tips: TipFactory::keepConstructorsCodeFree()->tips(),
                 )->errors();
@@ -96,13 +100,67 @@ final class KeepConstructorsCodeFreeAnalyzer extends RuleAnalyzer
         return $errors;
     }
 
+    private function isAssertion(Node $node): bool
+    {
+        if ($node instanceof Expression) {
+            $expr = $node->expr;
+
+            if ($expr instanceof Node\Expr\FuncCall) {
+                $name = $expr->name;
+                if ($name instanceof Node\Name) {
+                    $functionName = $name->toString();
+                    if (in_array(strtolower($functionName), ['assert', '\\assert'], true)) {
+                        return true;
+                    }
+                }
+            }
+
+            // Asserts like Assertion::notNull(), Assert::isTrue(), etc.
+            if ($expr instanceof Node\Expr\StaticCall) {
+                $class = $expr->class;
+                if ($class instanceof Node\Name) {
+                    $className = $class->toString();
+                    if (str_contains($className, 'Assert')) {
+                        return true;
+                    }
+                }
+            }
+
+            // Handle chained Assert::that()->method()->method() calls
+            if ($expr instanceof Node\Expr\MethodCall) {
+                $var = $expr->var;
+                while ($var instanceof Node\Expr\MethodCall) {
+                    $var = $var->var;
+                }
+                if ($var instanceof Node\Expr\StaticCall) {
+                    $class = $var->class;
+                    if ($class instanceof Node\Name && str_contains($class->toString(), 'Assert')) {
+                        return true;
+                    }
+                }
+
+                // Method calls like $this->assertNotNull()
+                if ($expr->name instanceof Node\Identifier) {
+                    $methodName = $expr->name->toString();
+                    if (str_starts_with($methodName, 'assert')) {
+                        if ($expr->var instanceof Node\Expr\Variable && $expr->var->name === 'this') {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     private function containsLogic(Node $expr): bool
     {
         return $expr instanceof Node\Expr\BinaryOp ||
-               $expr instanceof Node\Expr\FuncCall ||
-               $expr instanceof Node\Expr\MethodCall ||
-               $expr instanceof Node\Expr\Ternary ||
-               $expr instanceof Node\Expr\BooleanNot ||
-               $expr instanceof Node\Expr\Cast;
+            $expr instanceof Node\Expr\FuncCall ||
+            $expr instanceof Node\Expr\MethodCall ||
+            $expr instanceof Node\Expr\Ternary ||
+            $expr instanceof Node\Expr\BooleanNot ||
+            $expr instanceof Node\Expr\Cast;
     }
 }

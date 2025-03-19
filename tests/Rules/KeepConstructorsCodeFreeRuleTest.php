@@ -26,7 +26,7 @@ class KeepConstructorsCodeFreeRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassesWithConstructorCode.php'], [
             [
                 sprintf(
-                    'Constructor Atournayre\PHPStan\ElegantObject\Tests\Fixtures\KeepConstructorsCodeFree\ClassWithLogicInConstructor::__construct() contains code other than property assignments, which violates the "code-free constructor" principle (Elegant Object principle).%s    💡 %s',
+                    'Constructor Atournayre\PHPStan\ElegantObject\Tests\Fixtures\KeepConstructorsCodeFree\ClassWithLogicInConstructor::__construct() contains code other than property assignments or assertions, which violates the "code-free constructor" principle (Elegant Object principle).%s    💡 %s',
                     PHP_EOL,
                     TipFactory::keepConstructorsCodeFree()->tips()[0],
                 ),
@@ -34,7 +34,7 @@ class KeepConstructorsCodeFreeRuleTest extends RuleTestCase
             ],
             [
                 sprintf(
-                    'Constructor Atournayre\PHPStan\ElegantObject\Tests\Fixtures\KeepConstructorsCodeFree\AnotherClassWithLogicInConstructor::__construct() contains code other than property assignments, which violates the "code-free constructor" principle (Elegant Object principle).%s    💡 %s',
+                    'Constructor Atournayre\PHPStan\ElegantObject\Tests\Fixtures\KeepConstructorsCodeFree\AnotherClassWithLogicInConstructor::__construct() contains code other than property assignments or assertions, which violates the "code-free constructor" principle (Elegant Object principle).%s    💡 %s',
                     PHP_EOL,
                     TipFactory::keepConstructorsCodeFree()->tips()[0],
                 ),
@@ -46,6 +46,14 @@ class KeepConstructorsCodeFreeRuleTest extends RuleTestCase
     public function testValidConstructors(): void
     {
         $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassesWithValidConstructors.php'], []);
+    }
+
+    public function testConstructorsWithAssertions(): void
+    {
+        $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithAssertionLibrary.php'], []);
+        $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithMixedAssertionsAndAssignments.php'], []);
+        $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithNativeAssertions.php'], []);
+        $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithSelfAssertions.php'], []);
     }
 
 //    public function testExcludedPaths(): void
