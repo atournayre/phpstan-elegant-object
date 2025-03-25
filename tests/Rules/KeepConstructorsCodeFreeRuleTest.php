@@ -56,8 +56,8 @@ class KeepConstructorsCodeFreeRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithSelfAssertions.php'], []);
     }
 
-//    public function testExcludedPaths(): void
-//    {
-//        $this->analyse(['/excluded/path/test.php'], []);
-//    }
+    public function testConstructorWithParentCall(): void
+    {
+        $this->analyse([__DIR__ . '/../Fixtures/KeepConstructorsCodeFree/ClassWithParentConstructorCall.php'], []);
+    }
 }

@@ -74,13 +74,26 @@ final class KeepConstructorsCodeFreeAnalyzer extends RuleAnalyzer
         $hasNonAssignmentCode = false;
 
         foreach ($node->stmts as $stmt) {
-            if ($stmt instanceof Expression &&
-                $stmt->expr instanceof Assign &&
-                $stmt->expr->var instanceof Node\Expr\PropertyFetch &&
-                $stmt->expr->var->var instanceof Node\Expr\Variable &&
-                $stmt->expr->var->var->name === 'this' &&
-                !$this->containsLogic($stmt->expr->expr)) {
-                continue;
+            if ($stmt instanceof Expression) {
+                // Allow parent constructor calls
+                if ($stmt->expr instanceof Node\Expr\StaticCall
+                    && $stmt->expr->class instanceof Node\Name
+                    && $stmt->expr->class->toString() === 'parent'
+                    && $stmt->expr->name instanceof Node\Identifier
+                    && $stmt->expr->name->toString() === '__construct'
+                ) {
+                    continue;
+                }
+
+                // Check property assignments
+                if ($stmt->expr instanceof Assign
+                    && $stmt->expr->var instanceof Node\Expr\PropertyFetch
+                    && $stmt->expr->var->var instanceof Node\Expr\Variable
+                    && $stmt->expr->var->var->name === 'this'
+                    && !$this->containsLogic($stmt->expr->expr)
+                ) {
+                    continue;
+                }
             }
 
             if ($this->isAssertion($stmt)) {
