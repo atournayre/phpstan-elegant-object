@@ -7,6 +7,7 @@ namespace Atournayre\PHPStan\ElegantObject\Analyzer;
 use Atournayre\PHPStan\ElegantObject\Factory\RuleErrorFactory;
 use Atournayre\PHPStan\ElegantObject\Factory\TipFactory;
 use Atournayre\PHPStan\ElegantObject\Traits\PathExclusionTrait;
+use Atournayre\PHPStan\ElegantObject\Traits\SecondaryConstructorTrait;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
@@ -15,6 +16,7 @@ use PHPStan\ShouldNotHappenException;
 final class ExposeFewPublicMethodsAnalyzer extends RuleAnalyzer
 {
     use PathExclusionTrait;
+    use SecondaryConstructorTrait;
 
     /** @var int */
     private int $maxPublicMethods;
@@ -22,13 +24,16 @@ final class ExposeFewPublicMethodsAnalyzer extends RuleAnalyzer
     /**
      * @param array<string> $excludedPaths
      * @param int $maxPublicMethods
+     * @param array<string> $secondaryConstructorPrefixes
      */
     public function __construct(
         array $excludedPaths = [],
         int $maxPublicMethods = 5,
+        array $secondaryConstructorPrefixes = ['new', 'from', 'create', 'of', 'with'],
     ) {
         $this->excludedPaths = $excludedPaths;
         $this->maxPublicMethods = $maxPublicMethods;
+        $this->secondaryConstructorPrefixes = $secondaryConstructorPrefixes;
     }
 
     public function getNodeType(): string
@@ -38,23 +43,10 @@ final class ExposeFewPublicMethodsAnalyzer extends RuleAnalyzer
 
     public function shouldSkipAnalysis(Node $node, Scope $scope): bool
     {
-        if (!$node instanceof Class_) {
-            return true;
-        }
-
-        if ($node->isAbstract()) {
-            return true;
-        }
-
-        if ($node->isAnonymous()) {
-            return true;
-        }
-
-        if ($this->isExcludedPath($scope->getFile())) {
-            return true;
-        }
-
-        return false;
+        return !$node instanceof Class_
+            || $node->isAbstract()
+            || $node->isAnonymous()
+            || $this->isExcludedPath($scope->getFile());
     }
 
     /**
@@ -70,7 +62,7 @@ final class ExposeFewPublicMethodsAnalyzer extends RuleAnalyzer
         $publicMethodCount = 0;
 
         foreach ($methods as $method) {
-            if ($method->isPublic()) {
+            if ($method->isPublic() && !$this->isSecondaryConstructor($method->name->toString(), $scope) && $method->name->toString() !== '__construct') {
                 $publicMethodCount++;
             }
         }
