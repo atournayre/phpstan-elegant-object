@@ -7,6 +7,7 @@ use Atournayre\PHPStan\ElegantObject\Factory\RuleErrorFactory;
 use Atournayre\PHPStan\ElegantObject\Factory\TipFactory;
 use Atournayre\PHPStan\ElegantObject\Traits\InterfaceExceptionTrait;
 use Atournayre\PHPStan\ElegantObject\Traits\PathExclusionTrait;
+use Atournayre\PHPStan\ElegantObject\Traits\SecondaryConstructorTrait;
 use PhpParser\Node;
 use PhpParser\Node\Expr\New_;
 use PHPStan\Analyser\Scope;
@@ -16,12 +17,10 @@ final class NoNewOutsideSecondaryConstructorsAnalyzer extends RuleAnalyzer
 {
     use PathExclusionTrait;
     use InterfaceExceptionTrait;
+    use SecondaryConstructorTrait;
 
     /** @var array<string> */
     private array $excludedClasses;
-
-    /** @var array<string> */
-    private array $secondaryConstructorPrefixes;
 
     /**
      * @param array<string> $excludedPaths
@@ -51,45 +50,16 @@ final class NoNewOutsideSecondaryConstructorsAnalyzer extends RuleAnalyzer
      */
     public function shouldSkipAnalysis(Node $node, Scope $scope): bool
     {
-        if (!$node instanceof New_) {
-            return true;
-        }
-
-        if ($this->isExcludedPath($scope->getFile())) {
-            return true;
-        }
-
         $classReflection = $scope->getClassReflection();
-        if (null === $classReflection) {
-            return true;
-        }
+        $methodName = $scope->getFunction()?->getName() ?? '';
 
-        if ($this->hasAllowedInterface($classReflection)) {
-            return true;
-        }
-
-        if ($this->isExcludedClass($classReflection->getName())) {
-            return true;
-        }
-
-        // Get current method name
-        $methodName = '';
-        $function = $scope->getFunction();
-        if ($function !== null) {
-            $methodName = $function->getName();
-        }
-
-        // Allow new in __construct
-        if ($methodName === '__construct') {
-            return true;
-        }
-
-        // Allow new in static methods that match secondary constructor patterns
-        if ($this->isSecondaryConstructor($methodName, $scope)) {
-            return true;
-        }
-
-        return false;
+        return !$node instanceof New_
+            || $this->isExcludedPath($scope->getFile())
+            || $classReflection === null
+            || $this->hasAllowedInterface($classReflection)
+            || $this->isExcludedClass($classReflection->getName())
+            || $methodName === '__construct'
+            || $this->isSecondaryConstructor($methodName, $scope);
     }
 
     /**
@@ -109,11 +79,7 @@ final class NoNewOutsideSecondaryConstructorsAnalyzer extends RuleAnalyzer
         $className = $classReflection->getName();
 
         // Get method name safely
-        $methodName = '';
-        $function = $scope->getFunction();
-        if ($function !== null) {
-            $methodName = $function->getName();
-        }
+        $methodName = $scope->getFunction()?->getName() ?? '';
 
         $instantiatedClass = '';
         if ($node->class instanceof Node\Name) {
@@ -125,36 +91,6 @@ final class NoNewOutsideSecondaryConstructorsAnalyzer extends RuleAnalyzer
             [$className, $methodName, $instantiatedClass],
             TipFactory::noNewOutsideSecondaryConstructors()->tips(),
         )->errors();
-    }
-
-    private function isSecondaryConstructor(string $methodName, Scope $scope): bool
-    {
-        if (empty($methodName)) {
-            return false;
-        }
-
-        // Check if the method is static
-        $classReflection = $scope->getClassReflection();
-        if ($classReflection === null) {
-            return false;
-        }
-
-        $methodReflection = $classReflection->hasMethod($methodName)
-            ? $classReflection->getMethod($methodName, $scope)
-            : null;
-
-        if ($methodReflection === null || !$methodReflection->isStatic()) {
-            return false;
-        }
-
-        // Check if method name starts with any of the configured prefixes
-        foreach ($this->secondaryConstructorPrefixes as $prefix) {
-            if (str_starts_with($methodName, $prefix)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private function isExcludedClass(string $className): bool

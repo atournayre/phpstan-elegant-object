@@ -37,6 +37,16 @@ class ClassWithTooManyPublicMethods
     {
     }
 
+    public static function newOne(): self
+    {
+        return new self();
+    }
+
+    public static function new2(): self
+    {
+        return new self();
+    }
+
     protected function protectedMethod(): void
     {
     }

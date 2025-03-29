@@ -17,7 +17,11 @@ class ExposeFewPublicMethodsRuleTest extends RuleTestCase
 {
     protected function getRule(): Rule
     {
-        return new ExposeFewPublicMethodsRule();
+        return new ExposeFewPublicMethodsRule(
+            excludedPaths: [],
+            maxPublicMethods: 5,
+            secondaryConstructorPrefixes: ['new', 'from', 'create', 'of', 'with'],
+        );
     }
 
     public function testRule(): void
