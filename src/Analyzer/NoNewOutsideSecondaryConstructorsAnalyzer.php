@@ -88,6 +88,7 @@ final class NoNewOutsideSecondaryConstructorsAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             'The operator new is used in %s::%s() for class %s, which violates object encapsulation. Use secondary constructors (static factory methods) instead.',
+            'elegantObject.constructor.newOperatorUsed',
             [$className, $methodName, $instantiatedClass],
             TipFactory::noNewOutsideSecondaryConstructors()->tips(),
         )->errors();

@@ -104,6 +104,7 @@ final class KeepConstructorsCodeFreeAnalyzer extends RuleAnalyzer
                 $hasNonAssignmentCode = true;
                 $errors = RuleErrorFactory::createErrorWithTips(
                     message: 'Constructor %s::%s() contains code other than property assignments or assertions, which violates the "code-free constructor" principle (Elegant Object principle).',
+                    identifier: 'elegantObject.constructor.codeInConstructor',
                     messageParameters: [$className, $methodName],
                     tips: TipFactory::keepConstructorsCodeFree()->tips(),
                 )->errors();

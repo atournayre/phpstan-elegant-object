@@ -83,6 +83,7 @@ final class AlwaysUseInterfaceAnalyzer extends RuleAnalyzer
         if (empty($node->implements)) {
             return RuleErrorFactory::createErrorWithTips(
                 message: 'Class %s does not implement any interfaces, which violates the "always use interface" principle (Elegant Object principle).',
+                identifier: 'elegantObject.interfaces.noInterfaceImplemented',
                 messageParameters: [$className],
                 tips: TipFactory::alwaysUseInterface()->tips(),
             )->errors();

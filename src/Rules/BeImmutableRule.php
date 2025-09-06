@@ -61,14 +61,16 @@ final class BeImmutableRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         // Check property declarations
-        if (is_a($node, $this->propertyAnalyzer->getNodeType())) {
+        $propertyNodeType = $this->propertyAnalyzer->getNodeType();
+        if ($node instanceof $propertyNodeType) {
             if (!$this->propertyAnalyzer->shouldSkipAnalysis($node, $scope)) {
                 return $this->propertyAnalyzer->analyze($node, $scope);
             }
         }
 
         // Check property modifications
-        if (is_a($node, $this->modificationAnalyzer->getNodeType())) {
+        $modificationNodeType = $this->modificationAnalyzer->getNodeType();
+        if ($node instanceof $modificationNodeType) {
             if (!$this->modificationAnalyzer->shouldSkipAnalysis($node, $scope)) {
                 return $this->modificationAnalyzer->analyze($node, $scope);
             }

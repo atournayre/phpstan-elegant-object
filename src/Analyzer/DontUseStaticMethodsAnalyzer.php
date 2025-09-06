@@ -106,6 +106,7 @@ final class DontUseStaticMethodsAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             'Method %s::%s() is static, which violates object encapsulation (Elegant Object principle). Only secondary constructors (factory methods) can be static.',
+            'elegantObject.staticMethods.staticMethodFound',
             [$className, $methodName],
             TipFactory::staticMethods()->tips(),
         )->errors();

@@ -104,6 +104,7 @@ final class NeverReturnNullAnalyzer extends RuleAnalyzer
 
             return RuleErrorFactory::createErrorWithTips(
                 message: 'Method %s::%s() returns null, which violates object encapsulation (Elegant Object principle).',
+                identifier: 'elegantObject.returnValue.nullReturned',
                 messageParameters: [$className, $methodName],
                 tips: TipFactory::neverReturnNull()->tips(),
             )->errors();

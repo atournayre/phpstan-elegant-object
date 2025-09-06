@@ -93,6 +93,7 @@ final class PropertyMutabilityAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Property %s::$%s is mutable, which violates object immutability (Elegant Object principle).',
+            identifier: 'elegantObject.properties.mutableProperty',
             messageParameters: [$className, $propertyName],
             tips: TipFactory::beImmutable()->tips(),
         )->errors();
