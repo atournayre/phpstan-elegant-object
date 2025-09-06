@@ -82,6 +82,7 @@ final class AllPropertiesMustBePrivateAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             'Property %s::$%s is not private, which violates object encapsulation (Elegant Object principle).',
+            'elegantObject.properties.notPrivate',
             [$className, $propertyName],
             TipFactory::allPropertiesMustBePrivate()->tips(),
         )->errors();

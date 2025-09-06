@@ -8,6 +8,7 @@ use Atournayre\PHPStan\ElegantObject\Analyzer\RuleAnalyzer;
 use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 
 /**
@@ -36,6 +37,9 @@ class ComposableRule implements Rule
         throw new \LogicException('Analyzer must implement getNodeType() method');
     }
 
+    /**
+     * @return list<IdentifierRuleError>
+     */
     public function processNode(Node $node, Scope $scope): array
     {
         if ($this->analyzer instanceof RuleAnalyzer && $this->analyzer->shouldSkipAnalysis($node, $scope)) {

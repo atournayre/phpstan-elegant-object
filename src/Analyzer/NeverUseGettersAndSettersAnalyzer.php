@@ -85,6 +85,7 @@ final class NeverUseGettersAndSettersAnalyzer extends RuleAnalyzer
         if (Pattern::getter()->match($methodName)) {
             return RuleErrorFactory::createErrorWithTips(
                 message: 'Method %s::%s() appears to be a getter, which violates object encapsulation (Elegant Object principle).',
+                identifier: 'elegantObject.methods.getter',
                 messageParameters: [$className, $methodName],
                 tips: TipFactory::gettersAndSetters()->tips(),
             )->errors();
@@ -93,6 +94,7 @@ final class NeverUseGettersAndSettersAnalyzer extends RuleAnalyzer
         if (Pattern::setter()->match($methodName)) {
             return RuleErrorFactory::createErrorWithTips(
                 message: 'Method %s::%s() appears to be a setter, which violates object encapsulation (Elegant Object principle).',
+                identifier: 'elegantObject.methods.setter',
                 messageParameters: [$className, $methodName],
                 tips: TipFactory::gettersAndSetters()->tips(),
             )->errors();

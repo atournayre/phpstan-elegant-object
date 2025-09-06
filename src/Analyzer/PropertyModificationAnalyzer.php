@@ -129,6 +129,7 @@ final class PropertyModificationAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Method %s::%s() modifies an object property, which violates object immutability (Elegant Object principle).',
+            identifier: 'elegantObject.properties.propertyModified',
             messageParameters: [$className, $methodName],
             tips: TipFactory::beImmutable()->tips(),
         )->errors();

@@ -8,6 +8,7 @@ use PHPStan\Analyser\Scope;
 
 trait SecondaryConstructorTrait
 {
+    /** @var array<string> */
     private array $secondaryConstructorPrefixes = ['new', 'from', 'create', 'of', 'with', 'static'];
 
     private function isConstructor(string $methodName): bool
@@ -22,6 +23,9 @@ trait SecondaryConstructorTrait
         }
 
         foreach ($this->secondaryConstructorPrefixes as $prefix) {
+            if (!is_string($prefix)) {
+                continue;
+            }
             if (str_starts_with($methodName, $prefix)) {
                 return true;
             }

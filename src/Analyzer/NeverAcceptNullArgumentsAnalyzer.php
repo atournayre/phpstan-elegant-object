@@ -128,6 +128,7 @@ final class NeverAcceptNullArgumentsAnalyzer extends RuleAnalyzer
             if ($param->type instanceof NullableType) {
                 $errors[] = RuleErrorFactory::createErrorWithTips(
                     'Method %s::%s() accepts null for parameter $%s, which violates the rule of never accepting null arguments (Elegant Object principle).',
+                    'elegantObject.arguments.nullableParameter',
                     [$className, $methodName, $paramName],
                     TipFactory::neverAcceptNullArguments()->tips(),
                 )->errors()[0];
@@ -138,6 +139,7 @@ final class NeverAcceptNullArgumentsAnalyzer extends RuleAnalyzer
                 if ($param->default->name->toString() === 'null') {
                     $errors[] = RuleErrorFactory::createErrorWithTips(
                         'Method %s::%s() has default value null for parameter $%s, which violates the rule of never accepting null arguments (Elegant Object principle).',
+                        'elegantObject.arguments.nullDefaultValue',
                         [$className, $methodName, $paramName],
                         TipFactory::neverAcceptNullArguments()->tips(),
                     )->errors()[0];

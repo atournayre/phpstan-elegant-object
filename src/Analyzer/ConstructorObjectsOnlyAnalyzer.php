@@ -10,6 +10,7 @@ use Atournayre\PHPStan\ElegantObject\Traits\MethodExceptionTrait;
 use Atournayre\PHPStan\ElegantObject\Traits\PathExclusionTrait;
 use Atournayre\PHPStan\ElegantObject\Traits\TestClassTrait;
 use PhpParser\Node;
+use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
@@ -67,27 +68,46 @@ final class ConstructorObjectsOnlyAnalyzer extends RuleAnalyzer
 
         $errors = [];
 
-        foreach ($node->getParams() as $param) {
+        /** @var array<Param> $params */
+        $params = $node->getParams();
+        foreach ($params as $param) {
+            if (!$param instanceof Param) {
+                continue;
+            }
+
             $type = $param->type;
+
+            // Get parameter name safely
+            $paramVar = $param->var;
+            if (!$paramVar instanceof Node\Expr\Variable || !is_string($paramVar->name)) {
+                continue;
+            }
+            $paramName = $paramVar->name;
 
             // No type specified
             if (null === $type) {
                 $errors = array_merge($errors, RuleErrorFactory::createErrorWithTips(
                     message: 'Constructor parameter $%s has no type hint, but should be an object (Elegant Object principle).',
-                    messageParameters: [$param->var->name],
+                    identifier: 'elegantObject.constructor.noTypeHint',
+                    messageParameters: [$paramName],
                     tips: TipFactory::constructorParametersMustBeObjects()->tips(),
                 )->errors());
                 continue;
             }
 
             // Check if it's a primitive type
+            if (!method_exists($type, 'toString')) {
+                continue;
+            }
+            
             $typeName = $type->toString();
             $primitiveTypes = ['int', 'float', 'string', 'bool', 'array'];
 
             if (in_array($typeName, $primitiveTypes, true)) {
                 $errors = array_merge($errors, RuleErrorFactory::createErrorWithTips(
                     message: 'Constructor parameter $%s has primitive type %s, but should be an object (Elegant Object principle).',
-                    messageParameters: [$param->var->name, $typeName],
+                    identifier: 'elegantObject.constructor.primitiveParameter',
+                    messageParameters: [$paramName, $typeName],
                     tips: TipFactory::constructorParametersMustBeObjects()->tips(),
                 )->errors());
             }
