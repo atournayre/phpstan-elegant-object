@@ -75,6 +75,7 @@ final class KeepInterfacesShortAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Interface %s has %d methods, which exceeds the maximum of %d (Elegant Object principle).',
+            identifier: 'elegantObject.interfaces.tooManyMethods',
             messageParameters: [$interfaceName, $methodCount, $this->maxMethods],
             tips: TipFactory::keepInterfacesShort()->tips(),
         )->errors();

@@ -74,6 +74,7 @@ final class ConstructorObjectsOnlyAnalyzer extends RuleAnalyzer
             if (null === $type) {
                 $errors = array_merge($errors, RuleErrorFactory::createErrorWithTips(
                     message: 'Constructor parameter $%s has no type hint, but should be an object (Elegant Object principle).',
+                    identifier: 'elegantObject.constructor.noTypeHint',
                     messageParameters: [$param->var->name],
                     tips: TipFactory::constructorParametersMustBeObjects()->tips(),
                 )->errors());
@@ -87,6 +88,7 @@ final class ConstructorObjectsOnlyAnalyzer extends RuleAnalyzer
             if (in_array($typeName, $primitiveTypes, true)) {
                 $errors = array_merge($errors, RuleErrorFactory::createErrorWithTips(
                     message: 'Constructor parameter $%s has primitive type %s, but should be an object (Elegant Object principle).',
+                    identifier: 'elegantObject.constructor.primitiveParameter',
                     messageParameters: [$param->var->name, $typeName],
                     tips: TipFactory::constructorParametersMustBeObjects()->tips(),
                 )->errors());

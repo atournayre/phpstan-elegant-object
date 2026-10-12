@@ -74,6 +74,7 @@ final class NeverUseErNamesAnalyzer extends RuleAnalyzer
         if ($matches) {
             return RuleErrorFactory::createErrorWithTips(
                 message: 'Class %s has a name ending with "er", which violates object naming principles (Elegant Object principle).',
+                identifier: 'elegantObject.naming.erSuffix',
                 messageParameters: [$className],
                 tips: TipFactory::neverUseErNames()->tips(),
             )->errors();

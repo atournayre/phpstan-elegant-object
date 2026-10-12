@@ -69,6 +69,7 @@ final class BeEitherFinalOrAbstractAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Class %s is not final neither abstract, which violates the "be either final or abstract" principle (Elegant Object principle).',
+            identifier: 'elegantObject.class.notFinalOrAbstract',
             messageParameters: [$className],
             tips: TipFactory::beEitherFinalOrAbstract()->tips(),
         )->errors();
