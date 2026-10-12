@@ -79,6 +79,7 @@ final class NeverUsePublicConstantsAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Class %s has a public constant %s, which violates encapsulation (Elegant Object principle).',
+            identifier: 'elegantObject.constants.publicConstant',
             messageParameters: [$className, $node->consts[0]->name->toString()],
             tips: TipFactory::neverUsePublicConstants()->tips(),
         )->errors();

@@ -81,6 +81,7 @@ final class ExposeFewPublicMethodsAnalyzer extends RuleAnalyzer
 
         return RuleErrorFactory::createErrorWithTips(
             message: 'Class %s has %d public methods, which exceeds the maximum of %d (Elegant Object principle).',
+            identifier: 'elegantObject.publicMethods.tooManyPublicMethods',
             messageParameters: [$className, $publicMethodCount, $this->maxPublicMethods],
             tips: TipFactory::exposeFewPublicMethods()->tips(),
         )->errors();
