@@ -180,6 +180,15 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoBooleanFlagArgumentRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoBooleanFlagArgumentRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+      tags:
+        - phpstan.rules.rule
+
     # NoNewOutsideSecondaryConstructorsRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule
