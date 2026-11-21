@@ -82,3 +82,4 @@ Other:
 - [x] No primitive return (very strict, opt-in)
 - [ ] Constructor objects only
 - [x] Forbidden name patterns (Abstract*, Base*, *Impl, *Util, *Utils, *Data, *Info; chapter unverified)
+- [x] No protected members (protected is an inheritance hook)

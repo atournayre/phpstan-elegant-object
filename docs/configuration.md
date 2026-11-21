@@ -415,4 +415,25 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoProtectedMembersRule
+    # Flags protected methods, properties and constants. Always flagged in final classes; in abstract classes
+    # too, except protected abstract methods (template method hooks) or when allowInAbstractClasses is true.
+    # Members overriding a parent member and test classes are ignored.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoProtectedMembersRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedPropertyNames:
+          - 'allowedProperty'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\LegacyClass'
+        allowInAbstractClasses: false # default: abstract classes are flagged too
+      tags:
+        - phpstan.rules.rule
+
 ```
