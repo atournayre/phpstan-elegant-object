@@ -245,4 +245,20 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # InterfacesMustHaveSuffixRule
+    # Project naming policy (not from Yegor, who dislikes "I" prefixes): opt-in.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\InterfacesMustHaveSuffixRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        excludedNamespaces:
+          - 'App\Legacy\*'
+        allowedClasses:
+          - 'App\Contract\Countable' # short or fully qualified names, wildcards allowed
+        suffix: 'Interface'
+        forbidPrefix: false # true also rejects names like IFooInterface
+      tags:
+        - phpstan.rules.rule
+
 ```

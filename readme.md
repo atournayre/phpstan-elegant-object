@@ -72,4 +72,5 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
+- [x] Interfaces must have a suffix (project naming policy, opt-in; not from Yegor)
 - [ ] Constructor objects only
