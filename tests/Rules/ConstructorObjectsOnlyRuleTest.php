@@ -19,7 +19,7 @@ class ConstructorObjectsOnlyRuleTest extends RuleTestCase
     /** @var array<string, array<string>> */
     private array $configuration = [];
 
-    private bool $checkPrivateConstructors = true;
+    private bool $checkPrivateConstructors = false;
 
     protected function getRule(): ConstructorObjectsOnlyRule
     {
@@ -48,13 +48,12 @@ class ConstructorObjectsOnlyRuleTest extends RuleTestCase
             [$this->message('Union', '$id'), 23],
             [$this->message('Untyped', '$value'), 30],
             [$this->message('Several', '$items, $others, $any, $flag, $ratio'), 37],
-            [$this->message('PrivateConstructor', '$value'), 58],
         ]);
     }
 
-    public function testPrivateConstructorsCanBeIgnored(): void
+    public function testPrivateConstructorsCanBeChecked(): void
     {
-        $this->checkPrivateConstructors = false;
+        $this->checkPrivateConstructors = true;
 
         $this->analyse([__DIR__ . '/../Fixtures/ConstructorObjectsOnly/Example.php'], [
             [$this->message('Example', '$name'), 9],
@@ -62,6 +61,7 @@ class ConstructorObjectsOnlyRuleTest extends RuleTestCase
             [$this->message('Union', '$id'), 23],
             [$this->message('Untyped', '$value'), 30],
             [$this->message('Several', '$items, $others, $any, $flag, $ratio'), 37],
+            [$this->message('PrivateConstructor', '$value'), 58],
         ]);
     }
 

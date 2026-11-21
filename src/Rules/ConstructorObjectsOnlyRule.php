@@ -29,7 +29,7 @@ final class ConstructorObjectsOnlyRule extends ComposableRule
         array $allowedInterfaces = [],
         array $allowedClasses = [],
         array $allowedTypes = [],
-        bool $checkPrivateConstructors = true,
+        bool $checkPrivateConstructors = false,
     ) {
         parent::__construct(new ConstructorObjectsOnlyAnalyzer(
             $excludedPaths,

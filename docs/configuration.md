@@ -259,7 +259,7 @@ services:
           - 'App\Legacy\*'
         allowedTypes:
           - 'string' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
-        checkPrivateConstructors: true # false lets private constructors (named-constructor classes) take primitives
+        checkPrivateConstructors: false # default; true also checks private constructors (named-constructor classes)
       tags:
         - phpstan.rules.rule
 

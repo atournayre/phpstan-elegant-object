@@ -26,7 +26,8 @@ use PHPStan\ShouldNotHappenException;
  *
  * Primitive: string, int, float, bool, array, iterable, mixed (or no type), alone or as a union member.
  * Primitives belong to secondary constructors (named constructors), which build the objects.
- * Private constructors are checked too, unless `checkPrivateConstructors` is false.
+ * Private constructors (named-constructor classes such as Email::of(string)) are ignored,
+ * unless `checkPrivateConstructors` is true.
  * Test classes are ignored.
  *
  * Exemptions are chosen by the developer: excluded paths, allowed classes (wildcards), interfaces (wildcards),
@@ -62,7 +63,7 @@ final class ConstructorObjectsOnlyAnalyzer extends RuleAnalyzer
         array $allowedInterfaces = [],
         array $allowedClasses = [],
         array $allowedTypes = [],
-        bool $checkPrivateConstructors = true,
+        bool $checkPrivateConstructors = false,
     ) {
         $this->excludedPaths = $excludedPaths;
         $this->allowedParameterNames = $allowedParameterNames;
