@@ -67,7 +67,7 @@ From the book:
 - [x] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
 - [x] Be either final or abstract (chapter 4.3)
-- [ ] Private static literals (chapter 5.4)
+- [x] Private static literals (chapter 5.4)
 
 Other:
 - [x] All properties must be private

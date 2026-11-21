@@ -245,4 +245,20 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # PrivateStaticLiteralsRule
+    # A string literal repeated in the method bodies of a class must be extracted to a private constant.
+    # Ignored: '', '0', '1', array keys, constants, properties, attributes, parameter defaults,
+    # anonymous classes and test classes.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\PrivateStaticLiteralsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedLiterals:
+          - 'utf-8'
+        minOccurrences: 2 # reported from this many occurrences in the same class
+        minLength: 2 # shorter strings are ignored
+      tags:
+        - phpstan.rules.rule
+
 ```
