@@ -245,4 +245,24 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoPrimitiveReturnRule
+    # Very strict, opt-in: public methods must not return string/int/float/bool/array/iterable/mixed (or no type).
+    # void, never, self, static and object types are not primitive. bool is flagged unless listed in allowedTypes.
+    # Methods whose signature is imposed by a parent class or interface are ignored.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoPrimitiveReturnRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedTypes:
+          - 'bool' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
+      tags:
+        - phpstan.rules.rule
+
 ```
