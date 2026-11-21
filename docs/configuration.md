@@ -245,4 +245,21 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoGenericCatchRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoGenericCatchRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'RuntimeException' # wildcards supported; default: none
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+      tags:
+        - phpstan.rules.rule
+
 ```
