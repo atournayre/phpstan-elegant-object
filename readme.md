@@ -79,3 +79,4 @@ Other:
 - [x] Never swallow an exception: no empty catch (Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to" and 4.2.2 "Always chain exceptions"; inferred from the table-of-contents title, chapter content not verified)
 - [x] Catch must chain and rethrow (Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to", 4.2.2 "Always chain exceptions", 4.2.5 "Just one exception type is enough"; inferred from titles + 4.2.5 text read by the maintainer). Overlaps with NoEmptyCatchRule for empty bodies.
 - [x] Constructor objects only
+- [x] No primitive return (very strict, opt-in)
