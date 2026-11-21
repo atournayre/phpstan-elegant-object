@@ -357,4 +357,22 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # ConstructorObjectsOnlyRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\ConstructorObjectsOnlyRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedParameterNames:
+          - 'allowedParameter'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedTypes:
+          - 'string' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
+        checkPrivateConstructors: false # default; true also checks private constructors (named-constructor classes)
+      tags:
+        - phpstan.rules.rule
+
 ```
