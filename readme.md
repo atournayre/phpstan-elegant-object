@@ -73,3 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
+- [x] Max properties per class (encapsulate as little as possible, default 4, threshold unverified)
