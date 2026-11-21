@@ -85,6 +85,4 @@ Other:
 
 Project conventions (not from the books):
 - [x] Never throw generic exceptions (opt-in project convention; deviates from EO 4.2.5 "Just one exception type is enough")
-
-Project conventions (not from the books):
 - [x] Exceptions must use named constructors (project convention, opt-in; sits apart from EO 4.2.5 "Just one exception type is enough")
