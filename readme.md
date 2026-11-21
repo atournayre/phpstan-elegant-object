@@ -76,3 +76,4 @@ Other:
 - [ ] Constructor objects only
 - [x] Don't mock; use fakes (Elegant Objects vol.1, chapter 2.8; from the table-of-contents title, chapter content not verified)
 - [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
+- [x] No null usage (nullable properties, null comparisons, null-safe operators) (Elegant Objects vol.1, 2.6.5 "No NULL references" and 4.1 "Never return NULL"; from the table-of-contents titles, chapter content not verified)
