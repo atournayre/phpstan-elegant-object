@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoPrimitiveParameterInService;
+namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoPrimitiveParameter;
 
-final class ExampleService implements \ArrayAccess
+final class Example implements \ArrayAccess
 {
     public function __construct(private string $dependency)
     {
@@ -80,4 +80,30 @@ final class Value
 enum Status: string
 {
     case Active = 'active';
+}
+
+interface Contract
+{
+    public function impose(string $value): void;
+}
+
+final class Implementation implements Contract
+{
+    public function impose(string $value): void
+    {
+    }
+}
+
+abstract class Base
+{
+    public function template(int $value): void
+    {
+    }
+}
+
+final class Child extends Base
+{
+    public function template(int $value): void
+    {
+    }
 }
