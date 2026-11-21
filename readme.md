@@ -73,4 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
-- [x] Never swallow an exception: no empty catch (chapter unverified)
+- [x] Never swallow an exception: no empty catch (Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to" and 4.2.2 "Always chain exceptions"; inferred from the table-of-contents title, chapter content not verified)
