@@ -74,6 +74,22 @@ services:
       tags:
         - phpstan.rules.rule
     
+    # ConstructorsMustBePrivateRule
+    # Constructors declared by an interface or an abstract parent are always allowed.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\ConstructorsMustBePrivateRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        excludedNamespaces:
+          - 'App\Entity'
+          - 'App\Command'
+        allowedInterfaces:
+          - 'App\Contract\FrameworkInterface'
+          - 'Symfony\*\ConstructableInterface'
+      tags:
+        - phpstan.rules.rule
+
     # KeepConstructorsCodeFreeRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\KeepConstructorsCodeFreeRule
