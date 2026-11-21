@@ -73,4 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
-- [x] No generic catch (catch specific exceptions only; Elegant Objects chapter unverified)
+- [x] No generic catch (catch specific exceptions only; Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to"; inferred from the table-of-contents title, chapter content not verified)
