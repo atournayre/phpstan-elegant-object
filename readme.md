@@ -73,4 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
-- [x] No null usage (nullable properties, null comparisons, null-safe operators)
+- [x] No null usage (nullable properties, null comparisons, null-safe operators) (Elegant Objects vol.1, 2.6.5 "No NULL references" and 4.1 "Never return NULL"; from the table-of-contents titles, chapter content not verified)
