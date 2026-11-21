@@ -245,4 +245,19 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoStaticPropertiesRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoStaticPropertiesRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedPropertiesNames: # applies to static properties, static variables and global variables
+          - 'instance'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
 ```

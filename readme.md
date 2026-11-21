@@ -72,4 +72,5 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
+- [x] No static properties or global state
 - [ ] Constructor objects only
