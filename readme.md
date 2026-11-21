@@ -63,7 +63,7 @@ From the book:
 - [x] Never accept null arguments (chapter 3.3)
 - [x] Never use getters and setters (chapter 3.5)
 - [x] Don't use new outside of secondary constructors (chapter 3.6)
-- [ ] Avoid type introspection and casting (chapter 3.7)
+- [x] Avoid type introspection and casting (chapter 3.7)
 - [x] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
 - [x] Be either final or abstract (chapter 4.3)
@@ -72,5 +72,8 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
+- [x] No static properties or global state (Elegant Objects vol.1, 3.2 "Don't use static methods" and 3.2.4 "Singleton Pattern"; inferred from the table-of-contents titles, chapter content not verified)
 - [ ] Constructor objects only
+- [x] Don't mock; use fakes (Elegant Objects vol.1, chapter 2.8; from the table-of-contents title, chapter content not verified)
+- [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
 - [x] No null usage (nullable properties, null comparisons, null-safe operators) (Elegant Objects vol.1, 2.6.5 "No NULL references" and 4.1 "Never return NULL"; from the table-of-contents titles, chapter content not verified)
