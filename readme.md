@@ -65,7 +65,7 @@ From the book:
 - [x] Don't use new outside of secondary constructors (chapter 3.6)
 - [ ] Avoid type introspection and casting (chapter 3.7)
 - [x] Never return Null (chapter 4.1)
-- [ ] Throw only checked exceptions (chapter 4.2)
+- [x] Throw only checked exceptions (chapter 4.2) - adapted to PHP (no checked exceptions): never throw generic built-in exceptions
 - [x] Be either final or abstract (chapter 4.3)
 - [ ] Private static literals (chapter 5.4)
 
