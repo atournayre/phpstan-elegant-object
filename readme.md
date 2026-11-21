@@ -73,3 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
+- [x] No protected members (protected is an inheritance hook)
