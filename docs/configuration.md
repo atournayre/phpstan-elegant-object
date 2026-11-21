@@ -452,4 +452,19 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # ExceptionsMustUseNamedConstructorsRule (project convention, not from the Elegant Objects book; opt-in)
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\ExceptionsMustUseNamedConstructorsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        excludedNamespaces:
+          - 'App\Legacy'
+        allowedClasses:
+          - 'App\Exception\Legacy*'
+        allowedInterfaces:
+          - 'App\Contract\TolerantExceptionInterface'
+      tags:
+        - phpstan.rules.rule
+
 ```
