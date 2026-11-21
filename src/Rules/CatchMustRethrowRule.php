@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Atournayre\PHPStan\ElegantObject\Rules;
 
-use Atournayre\PHPStan\ElegantObject\Analyzer\NoGenericCatchAnalyzer;
+use Atournayre\PHPStan\ElegantObject\Analyzer\CatchMustRethrowAnalyzer;
 use Atournayre\PHPStan\ElegantObject\ComposableRule;
 use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use PhpParser\Node;
@@ -12,9 +12,9 @@ use PhpParser\Node;
 /**
  * @template T of NodeAnalyzerInterface
  * @template TNodeType of Node
- * @extends ComposableRule<NoGenericCatchAnalyzer, Node>
+ * @extends ComposableRule<CatchMustRethrowAnalyzer, Node>
  */
-final class NoGenericCatchRule extends ComposableRule
+final class CatchMustRethrowRule extends ComposableRule
 {
     /**
      * @param array<string> $excludedPaths
@@ -30,7 +30,7 @@ final class NoGenericCatchRule extends ComposableRule
         array $allowedClasses = [],
         array $allowedInterfaces = [],
     ) {
-        parent::__construct(new NoGenericCatchAnalyzer(
+        parent::__construct(new CatchMustRethrowAnalyzer(
             $excludedPaths,
             $allowedExceptions,
             $allowedMethodNames,

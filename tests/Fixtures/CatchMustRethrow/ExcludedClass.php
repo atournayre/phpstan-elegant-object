@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoGenericCatch;
+namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\CatchMustRethrow;
 
-final class TestHelper
+final class ExcludedClass
 {
     public function handle(): void
     {

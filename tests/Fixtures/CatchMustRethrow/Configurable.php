@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\NoGenericCatch;
+namespace Atournayre\PHPStan\ElegantObject\Tests\Fixtures\CatchMustRethrow;
 
 final class Configurable
 {
@@ -26,7 +26,7 @@ final class Configurable
     {
         try {
             $this->run();
-        } catch (\RuntimeException $e) {
+        } catch (\JsonException $e) {
         }
     }
 

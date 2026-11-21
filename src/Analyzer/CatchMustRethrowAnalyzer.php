@@ -10,27 +10,30 @@ use Atournayre\PHPStan\ElegantObject\Traits\MethodExceptionTrait;
 use Atournayre\PHPStan\ElegantObject\Traits\PathExclusionTrait;
 use Atournayre\PHPStan\ElegantObject\Traits\TestClassTrait;
 use PhpParser\Node;
+use PhpParser\Node\Expr\New_;
+use PhpParser\Node\Expr\Throw_;
+use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Stmt\Catch_;
+use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
 
 /**
- * Catch specific exceptions only (error handling, chapter number unverified).
+ * A catch block only exists to chain and rethrow (Elegant Objects vol.1, 4.2.1, 4.2.2 and 4.2.5).
  *
- * Flags every catch type (each member of a multi-catch) that is \Throwable, \Exception, \Error,
- * \RuntimeException or \LogicException. Rethrow-only handlers are flagged as well.
+ * Every catch body must contain either a bare `throw $e` or a `throw new X(...)` receiving the caught
+ * variable (positional or named argument, e.g. `previous: $e`). A catch without variable can never chain.
+ * Overlaps with NoEmptyCatchRule for empty bodies; the error identifier differs.
  *
- * Exemptions are chosen by the developer: excluded paths, allowed exceptions (wildcards),
+ * Exemptions are chosen by the developer: excluded paths, allowed exceptions (wildcards, catch types),
  * method names, classes (wildcards) and interfaces (wildcards). Test classes are skipped.
  */
-final class NoGenericCatchAnalyzer extends RuleAnalyzer
+final class CatchMustRethrowAnalyzer extends RuleAnalyzer
 {
     use PathExclusionTrait;
     use MethodExceptionTrait;
     use InterfaceExceptionTrait;
     use TestClassTrait;
-
-    private const GENERIC = ['throwable', 'exception', 'error', 'runtimeexception', 'logicexception'];
 
     /** @var array<string> */
     private array $allowedExceptions;
@@ -75,6 +78,12 @@ final class NoGenericCatchAnalyzer extends RuleAnalyzer
             return true;
         }
 
+        foreach ($node->types as $type) {
+            if ($this->matchesAny(ltrim($type->toString(), '\\'), $this->allowedExceptions)) {
+                return true;
+            }
+        }
+
         $classReflection = $scope->getClassReflection();
         if ($classReflection === null) {
             return false;
@@ -90,25 +99,53 @@ final class NoGenericCatchAnalyzer extends RuleAnalyzer
      */
     public function analyze(Node $node, Scope $scope): array
     {
-        if (!$node instanceof Catch_) {
+        if (!$node instanceof Catch_ || $this->rethrows($node)) {
             return [];
         }
 
-        $errors = [];
-        foreach ($node->types as $type) {
-            $name = ltrim($type->toString(), '\\');
-            if (!in_array(strtolower($name), self::GENERIC, true) || $this->matchesAny($name, $this->allowedExceptions)) {
-                continue;
-            }
+        $types = array_map(static fn (Node\Name $type): string => ltrim($type->toString(), '\\'), $node->types);
 
-            $errors[] = RuleErrorFactory::createErrorWithTips(
-                'Catching generic %s is forbidden. Catch a specific exception instead.',
-                'elegantObject.errorHandling.genericCatch',
-                [$name],
-            )->errors();
+        return RuleErrorFactory::createErrorWithTips(
+            'Catch of %s must chain the caught exception and rethrow it.',
+            'elegantObject.errorHandling.catchWithoutRethrow',
+            [implode('|', $types)],
+        )->errors();
+    }
+
+    private function rethrows(Catch_ $catch): bool
+    {
+        $caught = $catch->var?->name;
+        if (!is_string($caught)) {
+            return false;
         }
 
-        return array_merge(...$errors);
+        foreach ((new NodeFinder())->findInstanceOf($catch->stmts, Throw_::class) as $throw) {
+            if ($this->isVariable($throw->expr, $caught) || $this->chains($throw->expr, $caught)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function chains(Node\Expr $expr, string $caught): bool
+    {
+        if (!$expr instanceof New_) {
+            return false;
+        }
+
+        foreach ($expr->args as $arg) {
+            if ($arg instanceof Node\Arg && $this->isVariable($arg->value, $caught)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isVariable(Node\Expr $expr, string $name): bool
+    {
+        return $expr instanceof Variable && $expr->name === $name;
     }
 
     /**

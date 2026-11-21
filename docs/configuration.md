@@ -245,14 +245,14 @@ services:
       tags:
         - phpstan.rules.rule
 
-    # NoGenericCatchRule
+    # CatchMustRethrowRule
     -
-      class: Atournayre\PHPStan\ElegantObject\Rules\NoGenericCatchRule
+      class: Atournayre\PHPStan\ElegantObject\Rules\CatchMustRethrowRule
       arguments:
         excludedPaths:
           - '/excluded/path'
         allowedExceptions:
-          - 'RuntimeException' # wildcards supported; default: none
+          - 'JsonException' # catch types exempt, wildcards supported; default: none
         allowedMethodNames:
           - 'allowedMethod'
         allowedClasses:
