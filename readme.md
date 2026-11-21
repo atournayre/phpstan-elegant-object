@@ -63,7 +63,7 @@ From the book:
 - [x] Never accept null arguments (chapter 3.3)
 - [x] Never use getters and setters (chapter 3.5)
 - [x] Don't use new outside of secondary constructors (chapter 3.6)
-- [ ] Avoid type introspection and casting (chapter 3.7)
+- [x] Avoid type introspection and casting (chapter 3.7)
 - [x] Never return Null (chapter 4.1)
 - [ ] Throw only checked exceptions (chapter 4.2)
 - [x] Be either final or abstract (chapter 4.3)

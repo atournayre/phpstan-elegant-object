@@ -245,4 +245,19 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # AvoidTypeIntrospectionRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\AvoidTypeIntrospectionRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'equals'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
 ```
