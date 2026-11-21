@@ -324,4 +324,20 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoEmptyCatchRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoEmptyCatchRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'JsonException'
+          - 'App\Exception\Ignorable*' # wildcards; every caught type must match
+        allowedMethodNames:
+          - 'tryClose'
+        allowedClasses:
+          - 'App\Legacy\Cleaner'
+      tags:
+        - phpstan.rules.rule
+
 ```
