@@ -72,4 +72,4 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
-- [ ] Constructor objects only
+- [x] Constructor objects only
