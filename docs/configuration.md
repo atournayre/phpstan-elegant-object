@@ -436,4 +436,20 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NeverThrowGenericExceptionsRule (opt-in project convention, deviates from EO 4.2.5)
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NeverThrowGenericExceptionsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'App\Exception\*' # wildcards, tolerated even if listed as generic
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedClasses:
+          - 'App\Legacy\LegacyService' # exact class names
+        requiredInterface: 'App\Exception\DomainExceptionInterface' # optional: every thrown class must implement it
+      tags:
+        - phpstan.rules.rule
+
 ```
