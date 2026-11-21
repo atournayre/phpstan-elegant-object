@@ -73,4 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
-- [x] Max properties per class (encapsulate as little as possible, default 4, threshold unverified)
+- [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
