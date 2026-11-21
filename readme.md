@@ -74,3 +74,4 @@ Other:
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
 - [x] Don't mock; use fakes (Elegant Objects vol.1, chapter 2.8; from the table-of-contents title, chapter content not verified)
+- [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
