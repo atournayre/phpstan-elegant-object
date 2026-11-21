@@ -245,4 +245,22 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # ForbiddenNamePatternsRule
+    # Default patterns: Abstract*, Base*, *Impl, *Util, *Utils, *Data, *Info (globs on the short name, case-sensitive).
+    # *Helper and *Manager are already flagged by NeverUseErNamesRule (-er suffix) and are not repeated here.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\ForbiddenNamePatternsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        forbiddenPatterns: # replaces the default patterns when given
+          - 'Abstract*'
+          - '*Impl'
+        allowedClasses: # wildcards on the fully qualified name
+          - 'App\Legacy\*'
+        allowedInterfaces: # wildcards on the fully qualified name
+          - 'App\Contract\*Info'
+      tags:
+        - phpstan.rules.rule
+
 ```
