@@ -245,6 +245,52 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # AvoidTypeIntrospectionRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\AvoidTypeIntrospectionRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'equals'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
+    # NoMockInTestsRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoMockInTestsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'createStub'
+        allowedClasses:
+          - 'App\Tests\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
+    # MaxPropertiesRule
+    # Counts instance properties (promoted ones included). The default of 4 is a configurable guess:
+    # the exact threshold of the "encapsulate as little as possible" principle is not verified.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\MaxPropertiesRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        maxProperties: 4
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+      tags:
+        - phpstan.rules.rule
+
+```
+
     # NoStaticPropertiesRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NoStaticPropertiesRule
