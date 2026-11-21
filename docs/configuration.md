@@ -205,6 +205,15 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoPrimitiveParameterInServiceRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoPrimitiveParameterInServiceRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+      tags:
+        - phpstan.rules.rule
+
     # NoNewOutsideSecondaryConstructorsRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule
