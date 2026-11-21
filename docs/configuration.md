@@ -245,4 +245,22 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoNullUsageRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoNullUsageRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedPropertyNames:
+          - 'allowedProperty'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        checkProperties: true  # nullable property types, null defaults
+        checkComparisons: true # === null, !== null, == null, != null, is_null()
+        checkNullsafe: true    # ?-> property fetch and method call
+      tags:
+        - phpstan.rules.rule
+
 ```
