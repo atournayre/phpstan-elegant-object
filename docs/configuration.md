@@ -205,6 +205,25 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoPrimitiveParameterRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoPrimitiveParameterRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedParameterNames:
+          - 'allowedParameter'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedTypes:
+          - 'string' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
+      tags:
+        - phpstan.rules.rule
+
     # NoNewOutsideSecondaryConstructorsRule
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NoNewOutsideSecondaryConstructorsRule
