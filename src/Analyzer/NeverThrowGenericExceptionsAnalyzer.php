@@ -19,8 +19,8 @@ use PHPStan\ShouldNotHappenException;
 /**
  * Throw only specific domain exceptions, never generic built-in ones.
  *
- * Adaptation of "Throw only checked exceptions" (Elegant Objects, 4.2): PHP has no checked exceptions,
- * so the rule forbids `throw new <generic built-in exception>` and, optionally, requires every thrown
+ * Opt-in project convention, NOT an Elegant Objects rule: it deviates from EO 4.2.5 ("Just one exception type
+ * is enough"). It forbids `throw new <generic built-in exception>` and, optionally, requires every thrown
  * class to implement a given interface. Rethrowing a caught variable (`throw $e`) is never flagged.
  */
 final class NeverThrowGenericExceptionsAnalyzer extends RuleAnalyzer

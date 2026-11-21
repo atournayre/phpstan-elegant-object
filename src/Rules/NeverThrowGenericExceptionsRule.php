@@ -10,6 +10,8 @@ use Atournayre\PHPStan\ElegantObject\Contract\NodeAnalyzerInterface;
 use PhpParser\Node;
 
 /**
+ * Opt-in project convention (not an Elegant Objects rule): deviates from EO 4.2.5.
+ *
  * @template T of NodeAnalyzerInterface
  * @template TNodeType of Node
  * @extends ComposableRule<NeverThrowGenericExceptionsAnalyzer, Node>

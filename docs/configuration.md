@@ -245,7 +245,7 @@ services:
       tags:
         - phpstan.rules.rule
 
-    # NeverThrowGenericExceptionsRule
+    # NeverThrowGenericExceptionsRule (opt-in project convention, deviates from EO 4.2.5)
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\NeverThrowGenericExceptionsRule
       arguments:
