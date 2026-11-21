@@ -245,4 +245,17 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # NoMockInTestsRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoMockInTestsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'createStub'
+        allowedClasses:
+          - 'App\Tests\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
 ```
