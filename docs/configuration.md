@@ -245,7 +245,7 @@ services:
       tags:
         - phpstan.rules.rule
 
-    # ExceptionsMustUseNamedConstructorsRule
+    # ExceptionsMustUseNamedConstructorsRule (project convention, not from the Elegant Objects book; opt-in)
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\ExceptionsMustUseNamedConstructorsRule
       arguments:

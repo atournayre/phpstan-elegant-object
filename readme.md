@@ -73,4 +73,6 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
-- [x] Exceptions must use named constructors
+
+Project conventions (not from the books):
+- [x] Exceptions must use named constructors (project convention, opt-in; sits apart from EO 4.2.5 "Just one exception type is enough")

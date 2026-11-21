@@ -17,6 +17,7 @@ use PHPStan\ShouldNotHappenException;
 
 /**
  * Exceptions are built through named constructors, e.g. `UserInvalid::becauseEmailIsMissing()`.
+ * Project convention, opt-in, not from the Elegant Objects book (it sits apart from EO 4.2.5).
  *
  * Flags:
  * - `new X(...)` where X is a user-defined Throwable, unless written inside class X itself (its named constructors);
