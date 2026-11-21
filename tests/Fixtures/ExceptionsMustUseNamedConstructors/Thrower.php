@@ -18,7 +18,7 @@ final class Thrower
 
     public function newBuiltIn(): void
     {
-        throw new \InvalidArgumentException('x');
+        throw new \InvalidArgumentException('not flagged: built-in');
     }
 
     public function newLoose(): void

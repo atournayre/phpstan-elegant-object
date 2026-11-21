@@ -19,8 +19,9 @@ use PHPStan\ShouldNotHappenException;
  * Exceptions are built through named constructors, e.g. `UserInvalid::becauseEmailIsMissing()`.
  *
  * Flags:
- * - `new X(...)` where X is a Throwable, unless written inside class X itself (its named constructors);
- * - a user-defined Throwable declaring a non-private constructor (built-in and vendor exceptions are ignored).
+ * - `new X(...)` where X is a user-defined Throwable, unless written inside class X itself (its named constructors);
+ * - a user-defined Throwable declaring a non-private constructor.
+ * Built-in and vendor exceptions are never flagged (see NeverThrowGenericExceptionsRule for generic ones).
  *
  * Overlap: the second check is also reported by ConstructorsMustBePrivateRule (for every class, not only exceptions),
  * under a different identifier. Disable one of them if the duplicate message is unwanted.
@@ -104,6 +105,10 @@ final class ExceptionsMustUseNamedConstructorsAnalyzer extends RuleAnalyzer
 
         foreach ($scope->getType($node)->getObjectClassReflections() as $thrown) {
             if (!$thrown->isSubclassOf(\Throwable::class) && $thrown->getName() !== \Throwable::class) {
+                continue;
+            }
+
+            if ($this->isVendorOrInternal($thrown)) {
                 continue;
             }
 

@@ -51,7 +51,6 @@ class ExceptionsMustUseNamedConstructorsRuleTest extends RuleTestCase
     {
         $this->analyse([$this->fixture('Thrower')], [
             [$this->newMessage(self::NS . 'UserInvalid'), 16],
-            [$this->newMessage('InvalidArgumentException'), 21],
             [$this->newMessage(self::NS . 'LooseException'), 26],
             [$this->newMessage(self::NS . 'AllowedByNameException'), 36],
             [$this->newMessage(self::NS . 'AllowedByInterfaceException'), 37],
@@ -79,7 +78,6 @@ class ExceptionsMustUseNamedConstructorsRuleTest extends RuleTestCase
 
         $this->analyse([$this->fixture('Thrower'), $this->fixture('AllowedByNameException')], [
             [$this->newMessage(self::NS . 'UserInvalid'), 16],
-            [$this->newMessage('InvalidArgumentException'), 21],
             [$this->newMessage(self::NS . 'LooseException'), 26],
         ]);
     }
@@ -89,7 +87,6 @@ class ExceptionsMustUseNamedConstructorsRuleTest extends RuleTestCase
         $this->configuration = ['excludedNamespaces' => [self::NS]];
 
         $this->analyse([$this->fixture('Thrower'), $this->fixture('LooseException')], [
-            [$this->newMessage('InvalidArgumentException'), 21],
         ]);
     }
 
