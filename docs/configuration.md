@@ -245,6 +245,156 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # AvoidTypeIntrospectionRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\AvoidTypeIntrospectionRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'equals'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
+    # NoMockInTestsRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoMockInTestsRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'createStub'
+        allowedClasses:
+          - 'App\Tests\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
+    # MaxPropertiesRule
+    # Counts instance properties (promoted ones included). The default of 4 is a configurable guess:
+    # the exact threshold of the "encapsulate as little as possible" principle is not verified.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\MaxPropertiesRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        maxProperties: 4
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+      tags:
+        - phpstan.rules.rule
+
+```
+
+    # NoStaticPropertiesRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoStaticPropertiesRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedPropertiesNames: # applies to static properties, static variables and global variables
+          - 'instance'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+      tags:
+        - phpstan.rules.rule
+
+    # NoNullUsageRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoNullUsageRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedPropertyNames:
+          - 'allowedProperty'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        checkProperties: true  # nullable property types, null defaults
+        checkComparisons: true # === null, !== null, == null, != null, is_null()
+        checkNullsafe: true    # ?-> property fetch and method call
+      tags:
+        - phpstan.rules.rule
+
+    # NoEmptyCatchRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoEmptyCatchRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'JsonException'
+          - 'App\Exception\Ignorable*' # wildcards; every caught type must match
+        allowedMethodNames:
+          - 'tryClose'
+        allowedClasses:
+          - 'App\Legacy\Cleaner'
+      tags:
+        - phpstan.rules.rule
+
+    # CatchMustRethrowRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\CatchMustRethrowRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'JsonException' # catch types exempt, wildcards supported; default: none
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+      tags:
+        - phpstan.rules.rule
+
+    # ConstructorObjectsOnlyRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\ConstructorObjectsOnlyRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedParameterNames:
+          - 'allowedParameter'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedTypes:
+          - 'string' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
+        checkPrivateConstructors: false # default; true also checks private constructors (named-constructor classes)
+      tags:
+        - phpstan.rules.rule
+
+    # NoPrimitiveReturnRule
+    # Very strict, opt-in: public methods must not return string/int/float/bool/array/iterable/mixed (or no type).
+    # void, never, self, static and object types are not primitive. bool is flagged unless listed in allowedTypes.
+    # Methods whose signature is imposed by a parent class or interface are ignored.
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\NoPrimitiveReturnRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedTypes:
+          - 'bool' # tolerated primitive types: string, int, float, bool, array, iterable, mixed
+      tags:
+        - phpstan.rules.rule
+
     # ForbiddenNamePatternsRule
     # Default patterns: Abstract*, Base*, *Impl, *Util, *Utils, *Data, *Info (globs on the short name, case-sensitive).
     # A trailing '*' requires an uppercase letter, digit, underscore or the end of the name: Abstract* matches
