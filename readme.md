@@ -72,5 +72,5 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
-- [x] No static properties or global state
+- [x] No static properties or global state (Elegant Objects vol.1, 3.2 "Don't use static methods" and 3.2.4 "Singleton Pattern"; inferred from the table-of-contents titles, chapter content not verified)
 - [ ] Constructor objects only
