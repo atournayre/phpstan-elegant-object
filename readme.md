@@ -72,6 +72,7 @@ From the book:
 Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
+- [x] No static properties or global state (Elegant Objects vol.1, 3.2 "Don't use static methods" and 3.2.4 "Singleton Pattern"; inferred from the table-of-contents titles, chapter content not verified)
 - [ ] Constructor objects only
 - [x] Don't mock; use fakes (Elegant Objects vol.1, chapter 2.8; from the table-of-contents title, chapter content not verified)
 - [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
