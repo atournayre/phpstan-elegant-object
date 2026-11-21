@@ -73,3 +73,4 @@ Other:
 - [x] All properties must be private
 - [x] Constructors must be private (use named constructors)
 - [ ] Constructor objects only
+- [x] Don't mock; use fakes (Elegant Objects vol.1, chapter 2.8; from the table-of-contents title, chapter content not verified)
