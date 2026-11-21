@@ -47,6 +47,7 @@ class ForbiddenNamePatternsRuleTest extends RuleTestCase
             [$this->message('ShapeInfo', '*Info'), 35],
             [$this->message('BaseBehaviour', 'Base*'), 39],
             [$this->message('ColorData', '*Data'), 43],
+            [$this->message('Base', 'Base*'), 75],
         ]);
     }
 

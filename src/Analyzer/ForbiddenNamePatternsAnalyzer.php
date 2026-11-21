@@ -17,6 +17,7 @@ use PHPStan\ShouldNotHappenException;
  * Classes, interfaces, traits and enums must not carry a name that says nothing about what they are.
  *
  * Patterns are globs (`*` wildcard) matched case-sensitively against the short name.
+ * A trailing `*` stands for a word boundary: `Abstract*` matches Abstract and AbstractFoo, not Abstraction.
  * The "-er"/"-or" suffixes (including Helper and Manager) are handled by NeverUseErNames and are not repeated here.
  */
 final class ForbiddenNamePatternsAnalyzer extends RuleAnalyzer
@@ -84,7 +85,7 @@ final class ForbiddenNamePatternsAnalyzer extends RuleAnalyzer
 
         $shortName = $node->name->toString();
         foreach ($this->forbiddenPatterns as $pattern) {
-            if (fnmatch($pattern, $shortName, FNM_NOESCAPE)) {
+            if ($this->matches($pattern, $shortName)) {
                 return RuleErrorFactory::createErrorWithTips(
                     'Name %s matches the forbidden pattern "%s". Pick a name that says what the object is.',
                     'elegantObject.naming.forbiddenPattern',
@@ -102,6 +103,16 @@ final class ForbiddenNamePatternsAnalyzer extends RuleAnalyzer
     private function isTestName(string $shortName): bool
     {
         return str_contains($shortName, 'Test') || str_contains($shortName, 'InMemory');
+    }
+
+    private function matches(string $pattern, string $shortName): bool
+    {
+        $trailing = str_ends_with($pattern, '*');
+        $body = $trailing ? substr($pattern, 0, -1) : $pattern;
+        $regex = str_replace('\\*', '.*', preg_quote($body, '/'));
+        $regex = '/^' . $regex . ($trailing ? '(?:[A-Z0-9_].*)?' : '') . '$/';
+
+        return preg_match($regex, $shortName) === 1;
     }
 
     private function isAllowedClass(string $className): bool

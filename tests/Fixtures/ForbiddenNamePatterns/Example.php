@@ -63,3 +63,15 @@ final class ShapeTest
 final class InMemoryShapeData
 {
 }
+
+final class Abstraction
+{
+}
+
+final class Baseline
+{
+}
+
+final class Base
+{
+}

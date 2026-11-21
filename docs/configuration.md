@@ -247,6 +247,8 @@ services:
 
     # ForbiddenNamePatternsRule
     # Default patterns: Abstract*, Base*, *Impl, *Util, *Utils, *Data, *Info (globs on the short name, case-sensitive).
+    # A trailing '*' requires an uppercase letter, digit, underscore or the end of the name: Abstract* matches
+    # AbstractFoo, not Abstraction; Base* matches BaseFoo and Base, not Baseline.
     # *Helper and *Manager are already flagged by NeverUseErNamesRule (-er suffix) and are not repeated here.
     -
       class: Atournayre\PHPStan\ElegantObject\Rules\ForbiddenNamePatternsRule
