@@ -78,3 +78,4 @@ Other:
 - [x] Max properties per class: encapsulate as little as possible (Elegant Objects vol.1, 2.1 - from the table-of-contents title; chapter content not verified). Default threshold 4 is an unverified guess
 - [x] No null usage (nullable properties, null comparisons, null-safe operators) (Elegant Objects vol.1, 2.6.5 "No NULL references" and 4.1 "Never return NULL"; from the table-of-contents titles, chapter content not verified)
 - [x] Never swallow an exception: no empty catch (Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to" and 4.2.2 "Always chain exceptions"; inferred from the table-of-contents title, chapter content not verified)
+- [x] Catch must chain and rethrow (Elegant Objects vol.1, 4.2.1 "Don't catch unless you have to", 4.2.2 "Always chain exceptions", 4.2.5 "Just one exception type is enough"; inferred from titles + 4.2.5 text read by the maintainer). Overlaps with NoEmptyCatchRule for empty bodies.

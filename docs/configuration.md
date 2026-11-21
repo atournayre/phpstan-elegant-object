@@ -340,4 +340,21 @@ services:
       tags:
         - phpstan.rules.rule
 
+    # CatchMustRethrowRule
+    -
+      class: Atournayre\PHPStan\ElegantObject\Rules\CatchMustRethrowRule
+      arguments:
+        excludedPaths:
+          - '/excluded/path'
+        allowedExceptions:
+          - 'JsonException' # catch types exempt, wildcards supported; default: none
+        allowedMethodNames:
+          - 'allowedMethod'
+        allowedClasses:
+          - 'App\Legacy\*'
+        allowedInterfaces:
+          - 'App\Contract\*Interface'
+      tags:
+        - phpstan.rules.rule
+
 ```
